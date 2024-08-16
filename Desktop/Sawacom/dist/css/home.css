@@ -1,0 +1,228 @@
+/* Importing Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+/* globle css for the page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+/* css to the body */
+body {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* manages navbar decorations */
+.navbar {
+  background-color: #0DB8DE;
+  color: #fff;
+  text-align: center;  
+}
+.navbar .navbar-header{
+  grid-auto-flow: dense;
+  box-sizing: border-box;
+}
+
+/* Manages the main sidebar */
+.sidebar {
+  position: fixed;
+  top: 1;
+  left: 1;
+  height: 105%;
+  width: 90px;
+  display: flex;
+  overflow-x: hidden;
+  flex-direction:column;
+  background: #525151;
+  padding: 20px 20px;
+  transition: all 0.2s ease;
+  border-right: 4px solid #0DB8DE;
+  
+}
+/* Determines the width of the sidebar  */
+.sidebar:hover {
+  width: 195px;
+  margin: auto;
+  padding: auto;
+ 
+
+}
+
+/* aligns the sidebar header display */
+.sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
+}
+/* Hide the image on sidebar-header */
+.sidebar .sidebar-header img {
+  display: none;
+  
+}
+
+/* Show image when side bar is hovered over */
+.sidebar:hover .sidebar-header img {
+  width: 150px ;
+  border-radius: 5%;
+  display: flex;
+  transform: translateX(20%);
+  transform: translatey(5%);
+  transition: 0.0ms;
+  align-items: center;
+  
+}
+
+/* manages the h2 before sidebar hover */
+.sidebar .sidebar-header h2 {
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  transform: translateY(0%);
+  transform: translateX(-15%);
+  transition: 0ms;
+  font-size: 0.9em;
+}
+
+/* manages the h2 during sidebar hovering */
+.sidebar:hover .sidebar-header h2 {
+  font-size: 25px;
+  transform: translateX(10%);
+  transition: 0s;
+  text-indent: 0.5px;
+  display: none;
+  
+  
+}
+
+/* manages the h4 links */
+.sidebar-links h4 {
+  color: #0DB8DE;
+  font-weight:2px;
+  white-space: nowrap;
+  margin: 10px 0;
+  position: relative;
+  font-size: 10;
+  
+}
+.sidebar:hover .material-symbols-outlined {
+  font-size: 25px;
+  transform: translateX(10%);
+  transition: 0s;
+  text-indent: 0.5px;
+  display:flexbox;
+}
+
+/* manages the h4 span */
+.sidebar-links h4 span {
+  opacity: 0;
+}
+/* allows visibility of the h4 span links */
+.sidebar:hover .sidebar-links h4 span {
+  opacity: 1;
+}
+/* adds css to the menu separators */
+.sidebar-links .menu-separator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(1);
+  transform: translateY(-50%);
+  background: #0DB8DE;
+  transform-origin: right;
+  transition-delay: 0.2s;
+}
+/* Removes the menu separators */
+.sidebar:hover .sidebar-links .menu-separator {
+  transition-delay: 0s;
+  transform: scaleX(0);
+}
+/* manages scrollbor */
+.sidebar-links {
+  list-style: none;
+  margin-top: 10px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width:auto;
+  scroll-behavior: smooth;
+  
+}
+
+/* manages scrollbar display */
+.sidebar-links::-webkit-scrollbar {
+  display: none;
+}
+/* manages links lists on the sidebar */
+.sidebar-links li a {
+  display: flex;
+  align-items: center;
+  gap: 0 15px;
+  color: #fff;
+  font-weight: 20;
+  white-space: nowrap;
+  padding: 13px 15px;
+  text-decoration: none;
+  transition: 0.3ms ease;
+  font-size: smaller;
+  
+}
+
+/* manages the color and background of links when hovering */
+.sidebar-links li a:hover {
+  color: #0DB8DE;
+  background: #fff;
+  border-radius: 4px;
+  transition: 0.1ms ease;    
+}
+/* Manages users account, profile, image and h3 */
+.user-account {
+  margin-top: auto;
+  padding: 12px 10px;
+  margin-left: -10px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.user-profile img {
+  width: 42px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+}
+
+.user-profile h3 {
+  font-size: 1rem;
+  font-weight: 1;
+}
+
+.user-profile span {
+  font-size: 0.5rem;
+  font-weight: 8;
+}
+/* Manages user details before hovering */
+.user-detail {
+  margin-left: 1px;
+  white-space: nowrap;
+  font-size: 0.5em;
+  transform: translateX(-15%);
+  color:#080808;
+  font-variant:normal;
+  transition: 0s;
+  align-items: center;
+  padding-bottom: 40px;  
+}
+
+/* Manages user account during hovering */
+.sidebar:hover .user-account {
+  border-radius: 4px;
+  font-size: 25px;
+  transform: translateX(15%);
+  transition: 0s;
+  white-space: nowrap;
+  padding-bottom: 10px; 
+}

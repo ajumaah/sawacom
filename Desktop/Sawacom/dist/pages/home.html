@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sawa | Home</title>
+    <!-- Linking Google Font Link For Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link  rel= "stylesheet" href="/css/home.css">
+  </head>
+  <body >
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/images/logo.png" alt="Sawacom" />
+        <h2>
+          <span class="logo">Sawacom</span></h2>
+      </div>
+      <ul class="sidebar-links">
+        <h4>
+          <span>Main Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <!-- Shows pending repair collections buy customers-->
+          <a href="#Dashboard">
+            <span class="material-symbols-outlined"> dashboard </span
+            >Dashboard</a
+          >
+        </li>
+        <li>
+          <!-- shows booking forms -->
+          <a href="/pages/booking.html" target="_parent"
+            ><span class="material-symbols-outlined"> box </span
+            >Booking</a
+          >
+        </li>
+        <li>
+          <!-- Shows most booked devices and their issues -->
+          <a href="#Analytic"
+            ><span class="material-symbols-outlined"> monitoring </span
+            >Analytic</a
+          >
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="#Repair Center"
+            ><span class="material-symbols-outlined"> contacts </span>Repair Centre</a
+          >
+        </li>
+        <li>
+          <!-- Admin page to add users -->
+          <a href="#Groups"
+            ><span class="material-symbols-outlined"> groups </span>Groups</a
+          >
+        </li>
+        <li>
+          <!-- Used to transfer to other shops in case of wrong routing -->
+          <a href="#Transfer"
+            ><span class="material-symbols-outlined"> move_up </span>Transfer</a
+          >
+        </li>
+        <li>
+          <!-- Shows all devices that have ever been booked-->
+          <a href="#All Reports"
+            ><span class="material-symbols-outlined"> flag </span>All Reports</a
+          >
+        </li>
+        <li>
+          <!-- Shows all devices awaiting receiving from repair center and SLAs -->
+          <a href="#Notifications"
+            ><span class="material-symbols-outlined">
+              notifications_active </span
+            >Notifications</a
+          >
+        </li>
+        <h4>
+          <!-- shows user details -->
+          <span>Account</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <!-- shows user photo, ID, user rights and station | Admin will add this and it will be readonly to users-->
+        <li>
+          <a href="#My Profile"
+            ><span class="material-symbols-outlined"> account_circle </span
+            >Profile</a
+          >
+        </li>
+        <!-- User can use setting to change theme -->
+        <li>
+          <a href="#Settings"
+            ><span class="material-symbols-outlined"> settings </span
+            >Settings</a
+          >
+        </li>
+        <!-- add user log out of the system -->
+        <li>
+          <a href="/dist/pages/login.html"
+            ><span class="material-symbols-outlined"> logout </span>Logout</a
+          >
+        </li>
+      </ul>
+      <!-- adds user username user access right eg user or admin or technician -->
+      <div class="user-account">
+        <!-- <div class="user-profile"> -->
+          <!-- <img src="images/profile-img.jpg" alt="Profile Image" /> -->
+          <div class="user-detail">
+            <h3>Alfonse Juma</h3>
+            <h6><span>Web Developer</span></h6>
+          </div>
+        </div>
+      </div>
+    </aside>
+    </div>
+    <div id="Booking"></div>
+  </body>
+</html>
