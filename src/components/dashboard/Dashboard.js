@@ -12,11 +12,8 @@ const Dashboard = ({
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6} lg={4}>
-          <Link href="/booked" passHref  style={{ textDecoration: "none" }}>
-            <Box
-          
-              sx={{ textDecoration: "none", display: "block" }}
-            >
+          <Link href="/booked" passHref style={{ textDecoration: "none" }}>
+            <Box sx={{ textDecoration: "none", display: "block" }}>
               <Paper
                 elevation={3}
                 style={{ padding: "20px", backgroundColor: "#64ffda" }}

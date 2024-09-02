@@ -49,7 +49,7 @@ const Sidebar = () => {
       <List>
         <Typography variant="subtitle1">Main Menu</Typography>
         <Divider />
-        <ListItem button component="a" href="/dashboard">
+        <ListItem button component="a" href="/master">
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
