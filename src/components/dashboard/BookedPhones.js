@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-
-// Sample data
-const bookedPhones = [
-  {
-    customerName: 'John Doe',
-    phoneNumber: '1234567890',
-    phoneMake: 'Samsung',
-    phoneModel: 'Galaxy S21',
-    imei: '123456789012345',
-    phoneIssues: 'Screen crack',
-    dateBooked: '2024-09-01',
-  },
-  // Add more sample data as needed
-];
+import { SERVER_URL } from '../../../config';
 
 const BookedPhonesTable = () => {
+  const [bookedPhones, setBookedPhones] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the /booked API
+    fetch(`${SERVER_URL}/booking`)
+      .then((response) => response.json())
+      .then((data) => setBookedPhones(data))
+      .catch((error) => console.error('Error fetching booked phones:', error));
+  }, []);
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -31,17 +33,25 @@ const BookedPhonesTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {bookedPhones.map((phone, index) => (
-            <TableRow key={index}>
-              <TableCell>{phone.customerName}</TableCell>
-              <TableCell>{phone.phoneNumber}</TableCell>
-              <TableCell>{phone.phoneMake}</TableCell>
-              <TableCell>{phone.phoneModel}</TableCell>
-              <TableCell>{phone.imei}</TableCell>
-              <TableCell>{phone.phoneIssues}</TableCell>
-              <TableCell>{phone.dateBooked}</TableCell>
+          {bookedPhones.length > 0 ? (
+            bookedPhones.map((phone, index) => (
+              <TableRow key={index}>
+                <TableCell>{phone.customerName}</TableCell>
+                <TableCell>{phone.phoneNumber}</TableCell>
+                <TableCell>{phone.phoneMake}</TableCell>
+                <TableCell>{phone.phoneModel}</TableCell>
+                <TableCell>{phone.imei}</TableCell>
+                <TableCell>{phone.phoneIssues}</TableCell>
+                <TableCell>{formatDate(phone.createdAt)}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={7} align="center">
+                No booked phones found.
+              </TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </TableContainer>
