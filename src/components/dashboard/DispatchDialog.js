@@ -8,14 +8,19 @@ import {
   Typography,
   Grid,
   TextField,
+  CircularProgress,
 } from "@mui/material";
+import { SERVER_URL } from "../../../config";
 
 const DispatchDialog = ({ open, onClose, phone }) => {
   const [formData, setFormData] = useState({
-    repairCenter: "",
-    courior: "",
-    waybillNumber: ""
+    repairCenterName: "",
+    courier: "",
+    waybillNumber: "",
   });
+  const [loading, setLoading] = useState(false); // To handle loading state
+  const [error, setError] = useState(""); // To handle any errors
+
   if (!phone) return null; // Return null if no phone is selected
 
   const handleChange = (e) => {
@@ -25,12 +30,41 @@ const DispatchDialog = ({ open, onClose, phone }) => {
     });
   };
 
+  const handleDispatch = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch(`${SERVER_URL}/dispatch`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          repairsId: phone._id, // Assuming phone has an id property
+          repairCenterName: formData.repairCenterName,
+          courier: formData.courier,
+          waybillNumber: formData.waybillNumber,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to dispatch phone");
+      }
+
+      onClose(); // Close the dialog on successful dispatch
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Dispatch Phone</DialogTitle>
       <DialogContent>
         <Typography variant="h6">
-          Dispatch Details for  {phone.phoneMake} {phone.phoneModel}
+          Dispatch Details for {phone.phoneMake} {phone.phoneModel}
         </Typography>
         <Grid container spacing={3} direction="column">
           <Grid item>
@@ -38,18 +72,18 @@ const DispatchDialog = ({ open, onClose, phone }) => {
               fullWidth
               label="Repair Center"
               variant="outlined"
-              name="repairCenter"
-              value={formData.repairCenter}
+              name="repairCenterName"
+              value={formData.repairCenterName}
               onChange={handleChange}
             />
           </Grid>
           <Grid item>
             <TextField
               fullWidth
-              label="Courior"
+              label="Courier"
               variant="outlined"
-              name="courior"
-              value={formData.courior}
+              name="courier"
+              value={formData.courier}
               onChange={handleChange}
             />
           </Grid>
@@ -63,14 +97,19 @@ const DispatchDialog = ({ open, onClose, phone }) => {
               onChange={handleChange}
             />
           </Grid>
+          {error && (
+            <Grid item>
+              <Typography color="error">{error}</Typography>
+            </Grid>
+          )}
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button onClick={onClose} color="primary" disabled={loading}>
           Cancel
         </Button>
-        <Button onClick={onClose} color="primary">
-          Dispatch
+        <Button onClick={handleDispatch} color="primary" disabled={loading}>
+          {loading ? <CircularProgress size={24} /> : "Dispatch"}
         </Button>
       </DialogActions>
     </Dialog>

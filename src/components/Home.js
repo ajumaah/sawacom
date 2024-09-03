@@ -70,7 +70,7 @@ const Sidebar = () => {
         
         <Typography variant="subtitle1">General</Typography>
         <Divider />
-        <ListItem button component="a" href="#Repair Center">
+        <ListItem button component="a" href="repaircenter">
           <ListItemIcon>
             <ContactsIcon />
           </ListItemIcon>
