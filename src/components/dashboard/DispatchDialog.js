@@ -9,6 +9,10 @@ import {
   Grid,
   TextField,
   CircularProgress,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import { SERVER_URL } from "../../../config";
 
@@ -20,6 +24,8 @@ const DispatchDialog = ({ open, onClose, phone }) => {
   });
   const [loading, setLoading] = useState(false); // To handle loading state
   const [error, setError] = useState(""); // To handle any errors
+
+  const repairCenters = ["Nokia Repair Center", "Neon Repair Center", "Vivo Repair Center", "Tecno RepairCenter"]; // Sample repair centers
 
   if (!phone) return null; // Return null if no phone is selected
 
@@ -68,14 +74,21 @@ const DispatchDialog = ({ open, onClose, phone }) => {
         </Typography>
         <Grid container spacing={3} direction="column">
           <Grid item>
-            <TextField
-              fullWidth
-              label="Repair Center"
-              variant="outlined"
-              name="repairCenterName"
-              value={formData.repairCenterName}
-              onChange={handleChange}
-            />
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Repair Center</InputLabel>
+              <Select
+                label="Repair Center"
+                name="repairCenterName"
+                value={formData.repairCenterName}
+                onChange={handleChange}
+              >
+                {repairCenters.map((center) => (
+                  <MenuItem key={center} value={center}>
+                    {center}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item>
             <TextField

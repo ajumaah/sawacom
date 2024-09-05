@@ -1,17 +1,44 @@
-import { useState, useEffect } from 'react';
-import { Container, Grid, Typography, FormControl, InputLabel, Select, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { useState, useEffect } from "react";
+import {
+  Container,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import { SERVER_URL } from "../../../config";
 
 const RepairCenterDashboard = () => {
   const [repairCenters, setRepairCenters] = useState([]);
-  const [selectedRepairCenter, setSelectedRepairCenter] = useState('');
+  const [selectedRepairCenter, setSelectedRepairCenter] = useState("");
   const [phones, setPhones] = useState([]);
 
   useEffect(() => {
     // Fetch repair centers from API
     const fetchRepairCenters = async () => {
-      const response = await fetch('/api/repair-centers');
-      const data = await response.json();
-      setRepairCenters(data);
+      try {
+        const response = await fetch(`${SERVER_URL}/dispatch`);
+        const data = await response.json();
+        console.log(data); // Log to inspect the data structure
+
+        // Extract unique repair center names using Set
+        const uniqueCenters = Array.from(
+          new Set(data.map((item) => item.repairCenterName))
+        );
+
+        setRepairCenters(uniqueCenters); // Set unique repair centers
+      } catch (error) {
+        console.error("Error fetching repair centers:", error);
+        setRepairCenters([]); // Set to empty array on error
+      }
     };
     fetchRepairCenters();
   }, []);
@@ -20,13 +47,32 @@ const RepairCenterDashboard = () => {
     // Fetch phones when selectedRepairCenter changes
     const fetchPhones = async () => {
       if (selectedRepairCenter) {
-        const response = await fetch(`/api/phones?repairCenter=${selectedRepairCenter}`);
-        const data = await response.json();
-        setPhones(data);
+        try {
+          const response = await fetch(
+            `${SERVER_URL}/dispatch?center=${selectedRepairCenter}`
+          );
+          const data = await response.json();
+          console.log(data); // Log data to inspect the structure
+          setPhones(data);
+        } catch (error) {
+          console.error("Error fetching phones:", error);
+        }
       }
     };
     fetchPhones();
   }, [selectedRepairCenter]);
+
+  // Filter phones based on the selected repair center and corresponding phone make
+  const filteredPhones = phones.filter((phone) => {
+    if (selectedRepairCenter.includes("Nokia")) {
+      return phone.phoneMake === "Nokia";
+    } else if (selectedRepairCenter.includes("Neon")) {
+      return phone.phoneMake === "Neon";
+    } else if (selectedRepairCenter.includes("Vivo Service Center")) {
+        return phone.phoneMake === "Vivo";
+    }
+    return true; // If other repair centers, return all phones
+  });
 
   return (
     <Container>
@@ -40,8 +86,8 @@ const RepairCenterDashboard = () => {
           onChange={(e) => setSelectedRepairCenter(e.target.value)}
         >
           {repairCenters.map((center) => (
-            <MenuItem key={center.name} value={center.name}>
-              {center.name}
+            <MenuItem key={center} value={center}>
+              {center}
             </MenuItem>
           ))}
         </Select>
@@ -52,37 +98,39 @@ const RepairCenterDashboard = () => {
             <TableRow>
               <TableCell>Customer Name</TableCell>
               <TableCell>Phone Number</TableCell>
-              <TableCell>Email</TableCell>
               <TableCell>Phone Make</TableCell>
               <TableCell>Phone Model</TableCell>
               <TableCell>IMEI</TableCell>
               <TableCell>Phone Issues</TableCell>
-              <TableCell>Created At</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Repair Center</TableCell>
               <TableCell>Courier</TableCell>
               <TableCell>Waybill Number</TableCell>
-              <TableCell>Repair Date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {phones.map((phone) => (
-              <TableRow key={phone.imei}>
-                <TableCell>{phone.customerName}</TableCell>
-                <TableCell>{phone.phoneNumber}</TableCell>
-                <TableCell>{phone.email}</TableCell>
-                <TableCell>{phone.phoneMake}</TableCell>
-                <TableCell>{phone.phoneModel}</TableCell>
-                <TableCell>{phone.imei}</TableCell>
-                <TableCell>{phone.phoneIssues}</TableCell>
-                <TableCell>{new Date(phone.createdAt).toLocaleDateString()}</TableCell>
-                <TableCell>{phone.status}</TableCell>
-                <TableCell>{phone.repairCenterName}</TableCell>
-                <TableCell>{phone.courier}</TableCell>
-                <TableCell>{phone.waybillNumber}</TableCell>
-                <TableCell>{new Date(phone.repairDate).toLocaleDateString()}</TableCell>
+            {filteredPhones.length > 0 ? (
+              filteredPhones.map((row) => (
+                <TableRow key={row._id}>
+                  {" "}
+                  {/* Use _id for uniqueness */}
+                  <TableCell>{row.customerName}</TableCell>
+                  <TableCell>{row.phoneNumber}</TableCell>
+                  <TableCell>{row.phoneMake}</TableCell>
+                  <TableCell>{row.phoneModel}</TableCell>
+                  <TableCell>{row.imei}</TableCell>
+                  <TableCell>{row.phoneIssues}</TableCell>
+                  <TableCell>{row.status}</TableCell>
+                  <TableCell>{row.repairCenterName}</TableCell>
+                  <TableCell>{row.courier}</TableCell>
+                  <TableCell>{row.waybillNumber}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={10}>No phones available</TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>

@@ -2,6 +2,7 @@ import Sidebar from "@/components/Home";
 
 function Home({ 
   bookedPhones, 
+  dispatchedPhones,
   repairedPhones, 
   collectedPhones, 
   pendingCollection, 
@@ -11,6 +12,7 @@ function Home({
     <div>
       <Sidebar 
         bookedPhones={bookedPhones} 
+        dispatchedPhones={dispatchedPhones}
         repairedPhones={repairedPhones} 
         collectedPhones={collectedPhones} 
         pendingCollection={pendingCollection} 
@@ -23,6 +25,7 @@ function Home({
 export async function getServerSideProps() {
   // Fetch data from your API here
   const bookedPhones = []; // Fetch booked phones
+  const dispatchedPhones = [];
   const repairedPhones = []; // Fetch repaired phones
   const collectedPhones = []; // Fetch collected phones
   const pendingCollection = []; // Fetch pending collection phones
@@ -31,6 +34,7 @@ export async function getServerSideProps() {
   return {
     props: {
       bookedPhones,
+      dispatchedPhones,
       repairedPhones,
       collectedPhones,
       pendingCollection,

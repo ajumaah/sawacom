@@ -4,6 +4,7 @@ import PhoneModelsGraph from "./PhoneModelsGraph";
 
 const Dashboard = ({
   bookedPhones = [],
+  dispatchedPhones = [],
   repairedPhones = [],
   collectedPhones = [],
   pendingCollection = [],
@@ -27,15 +28,19 @@ const Dashboard = ({
           </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <Paper
-            elevation={3}
-            style={{ padding: "20px", backgroundColor: "#1de9b6" }}
-          >
-            <Typography variant="h5">Out for Repair</Typography>
-            <Typography variant="body1">
-              {bookedPhones.length} Out for Repair
-            </Typography>
-          </Paper>
+          <Link href="/repaircenter" passHref style={{ textDecoration: "none" }}>
+            <Box sx={{ textDecoration: "none", display: "block" }}>
+              <Paper
+                elevation={3}
+                style={{ padding: "20px", backgroundColor: "#64ffda" }}
+              >
+                <Typography variant="h5">Out For Repair</Typography>
+                <Typography variant="body1">
+                  {dispatchedPhones.length} out for repair
+                </Typography>
+              </Paper>
+            </Box>
+          </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Paper
