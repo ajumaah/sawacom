@@ -14,9 +14,17 @@ const DashboardPage = () => {
       .catch((error) => console.error("Error fetching booked phones:", error));
   }, []);
 
+  useEffect(() => {
+    // Fetch data from the /booking API
+    fetch(`${SERVER_URL}/dispatch`)
+      .then((response) => response.json())
+      .then((data) => setDispatchedPhones(data))
+      .catch((error) => console.error("Error fetching booked phones:", error));
+  }, []);
+
   return (
     <div>
-      <Dashboard bookedPhones={bookedPhones} />
+      <Dashboard bookedPhones={bookedPhones} dispatchedPhones={dispatchedPhones}/>
     </div>
   );
 };

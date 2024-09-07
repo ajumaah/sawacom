@@ -69,7 +69,9 @@ const RepairCenterDashboard = () => {
     } else if (selectedRepairCenter.includes("Neon")) {
       return phone.phoneMake === "Neon";
     } else if (selectedRepairCenter.includes("Vivo Service Center")) {
-        return phone.phoneMake === "Vivo";
+      return phone.phoneMake === "Vivo";
+    } else if (selectedRepairCenter.includes("Samsung")) {
+      return phone.phoneMake === "Samsung";
     }
     return true; // If other repair centers, return all phones
   });

@@ -20,24 +20,72 @@ const Dashboard = ({
                 style={{ padding: "20px", backgroundColor: "#64ffda" }}
               >
                 <Typography variant="h5">Booked Phones</Typography>
-                <Typography variant="body1">
-                  {bookedPhones.length} phones booked
-                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <Typography variant="body1" sx={{ mr: 1 }}>No of booked Phones: </Typography>
+                  <Box
+                    sx={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      backgroundColor: "magenta",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {bookedPhones.length}
+                  </Box>
+                  
+                </Box>
               </Paper>
             </Box>
           </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <Link href="/repaircenter" passHref style={{ textDecoration: "none" }}>
+          <Link
+            href="/repaircenter"
+            passHref
+            style={{ textDecoration: "none" }}
+          >
             <Box sx={{ textDecoration: "none", display: "block" }}>
               <Paper
                 elevation={3}
                 style={{ padding: "20px", backgroundColor: "#64ffda" }}
               >
                 <Typography variant="h5">Out For Repair</Typography>
-                <Typography variant="body1">
-                  {dispatchedPhones.length} out for repair
-                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                   <Typography variant="body1" sx={{ mr: 1 }}>No out for repair: </Typography>
+                  <Box
+                    sx={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      backgroundColor: "red",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {dispatchedPhones.length}
+                  </Box>
+                 
+                </Box>
               </Paper>
             </Box>
           </Link>
@@ -48,9 +96,31 @@ const Dashboard = ({
             style={{ padding: "20px", backgroundColor: "#84ffff" }}
           >
             <Typography variant="h5">Repaired Phones</Typography>
-            <Typography variant="body1">
-              {repairedPhones.length} phones repaired
-            </Typography>
+            <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                   <Typography variant="body1" sx={{ mr: 1 }}>Repaired: </Typography>
+                  <Box
+                    sx={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      backgroundColor: "grey",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {dispatchedPhones.length}
+                  </Box>
+                 
+                </Box>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
@@ -59,9 +129,31 @@ const Dashboard = ({
             style={{ padding: "20px", backgroundColor: "#00bfa5" }}
           >
             <Typography variant="h5">Collected Phones</Typography>
-            <Typography variant="body1">
-              {collectedPhones.length} phones collected
-            </Typography>
+            <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                   <Typography variant="body1" sx={{ mr: 1 }}>Collected: </Typography>
+                  <Box
+                    sx={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      backgroundColor: "purple",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {dispatchedPhones.length}
+                  </Box>
+                 
+                </Box>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
@@ -70,9 +162,31 @@ const Dashboard = ({
             style={{ padding: "20px", backgroundColor: "#00e5ff" }}
           >
             <Typography variant="h5">Pending Collection</Typography>
-            <Typography variant="body1">
-              {pendingCollection.length} phones pending collection
-            </Typography>
+            <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                   <Typography variant="body1" sx={{ mr: 1 }}>To be collected: </Typography>
+                  <Box
+                    sx={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      backgroundColor: "blue",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {bookedPhones.length}
+                  </Box>
+                 
+                </Box>
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
@@ -81,9 +195,31 @@ const Dashboard = ({
             style={{ padding: "20px", backgroundColor: "#a7ffeb" }}
           >
             <Typography variant="h5">Others</Typography>
-            <Typography variant="body1">
-              {pendingCollection.length} Others
-            </Typography>
+            <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                   <Typography variant="body1" sx={{ mr: 1 }}>Others: </Typography>
+                  <Box
+                    sx={{
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                      backgroundColor: "magenta",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {dispatchedPhones.length}
+                  </Box>
+                 
+                </Box>
           </Paper>
         </Grid>
       </Grid>

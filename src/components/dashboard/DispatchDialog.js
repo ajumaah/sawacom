@@ -25,7 +25,7 @@ const DispatchDialog = ({ open, onClose, phone }) => {
   const [loading, setLoading] = useState(false); // To handle loading state
   const [error, setError] = useState(""); // To handle any errors
 
-  const repairCenters = ["Nokia Repair Center", "Neon Repair Center", "Vivo Repair Center", "Tecno RepairCenter"]; // Sample repair centers
+  const repairCenters = ["Samsung Repair Center", "Nokia Repair Center", "Neon Repair Center", "Vivo Repair Center", "Tecno RepairCenter"]; // Sample repair centers
 
   if (!phone) return null; // Return null if no phone is selected
 
