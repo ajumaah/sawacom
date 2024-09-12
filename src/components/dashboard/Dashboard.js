@@ -32,7 +32,7 @@ const Dashboard = ({
                     sx={{
                       width: "20px",
                       height: "20px",
-                      borderRadius: "50%",
+                      borderRadius: "20%",
                       backgroundColor: "magenta",
                       color: "white",
                       display: "flex",
@@ -73,7 +73,7 @@ const Dashboard = ({
                     sx={{
                       width: "20px",
                       height: "20px",
-                      borderRadius: "50%",
+                      borderRadius: "20%",
                       backgroundColor: "red",
                       color: "white",
                       display: "flex",
@@ -108,7 +108,7 @@ const Dashboard = ({
                     sx={{
                       width: "20px",
                       height: "20px",
-                      borderRadius: "50%",
+                      borderRadius: "20%",
                       backgroundColor: "grey",
                       color: "white",
                       display: "flex",
@@ -141,7 +141,7 @@ const Dashboard = ({
                     sx={{
                       width: "20px",
                       height: "20px",
-                      borderRadius: "50%",
+                      borderRadius: "20%",
                       backgroundColor: "purple",
                       color: "white",
                       display: "flex",
@@ -174,7 +174,7 @@ const Dashboard = ({
                     sx={{
                       width: "20px",
                       height: "20px",
-                      borderRadius: "50%",
+                      borderRadius: "20%",
                       backgroundColor: "blue",
                       color: "white",
                       display: "flex",
@@ -207,7 +207,7 @@ const Dashboard = ({
                     sx={{
                       width: "20px",
                       height: "20px",
-                      borderRadius: "50%",
+                      borderRadius: "20%",
                       backgroundColor: "magenta",
                       color: "white",
                       display: "flex",

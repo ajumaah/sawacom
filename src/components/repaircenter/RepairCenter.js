@@ -72,7 +72,10 @@ const RepairCenterDashboard = () => {
       return phone.phoneMake === "Vivo";
     } else if (selectedRepairCenter.includes("Samsung")) {
       return phone.phoneMake === "Samsung";
+    } else if (selectedRepairCenter.includes("Oppo")) {
+      return phone.phoneMake === "Oppo";
     }
+    
     return true; // If other repair centers, return all phones
   });
 

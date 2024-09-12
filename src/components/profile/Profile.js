@@ -16,7 +16,8 @@ import {
   MenuItem,
   CircularProgress,
   Box,
-  Skeleton, // Import Skeleton
+  Skeleton,
+  FormControl, // Import Skeleton
 } from "@mui/material";
 import { SERVER_URL } from "../../../config";
 
@@ -29,21 +30,22 @@ const Profile = () => {
     name: "",
     email: "",
     userType: "User",
+    repairCenter: "",
   });
   const [isFetching, setIsFetching] = useState(true); // State for checking if fetching is in progress
-
+  const repairCenters = ["Oppo service Center","Samsung Repair Center", "Nokia Repair Center", "Neon Repair Center", "Vivo Repair Center", "Tecno RepairCenter"]; // Sample repair centers
   // Fetch users from API
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(`${SERVER_URL}/users`);
         if (!response.ok) {
-          throw new Error('Failed to fetch users');
+          throw new Error("Failed to fetch users");
         }
         const data = await response.json();
         setUsers(data);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error("Error fetching users:", error);
       } finally {
         setIsFetching(false); // Stop fetching
       }
@@ -58,26 +60,31 @@ const Profile = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setNewUser({ name: "", email: "", userType: "User" });
+    setNewUser({ name: "", email: "", userType: "" });
   };
 
   const handleCreateUser = async () => {
     setLoading(true); // Start loading
     try {
       const response = await fetch(`${SERVER_URL}/users`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newUser),
       });
 
-      const responseText = await response.text();
-      console.log(responseText);
-
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`${response.status}: ${errorData.message || 'Network response was not ok'}`);
+        // Attempt to parse error message if response is not ok
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch {
+          errorData = { message: "Network response was not ok" };
+        }
+        throw new Error(
+          `${response.status}: ${errorData.message || "Failed to create user"}`
+        );
       }
 
       const result = await response.json();
@@ -85,7 +92,7 @@ const Profile = () => {
       setResponseMessage("User created successfully!"); // Set success message
       handleClose();
     } catch (error) {
-      console.error('Error creating user:', error);
+      console.error("Error creating user:", error);
       setResponseMessage(`Error: ${error.message}`); // Set error message
     } finally {
       setLoading(false); // Stop loading
@@ -105,33 +112,31 @@ const Profile = () => {
         Create User
       </Button>
       <Grid container spacing={2} marginTop={2}>
-        {isFetching ? (
-          // Render Skeletons while data is being fetched
-          Array.from(new Array(6)).map((_, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card>
-                <CardContent>
-                  <Skeleton variant="text" width={120} height={30} />
-                  <Skeleton variant="text" width={80} height={20} />
-                </CardContent>
-              </Card>
-            </Grid>
-          ))
-        ) : (
-          // Render users when data is fetched
-          users.map((user) => (
-            <Grid item xs={12} sm={6} md={4} key={user.id}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{user.name}</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {user.email}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))
-        )}
+        {isFetching
+          ? // Render Skeletons while data is being fetched
+            Array.from(new Array(6)).map((_, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardContent>
+                    <Skeleton variant="text" width={120} height={30} />
+                    <Skeleton variant="text" width={80} height={20} />
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          : // Render users when data is fetched
+            users.map((user) => (
+              <Grid item xs={12} sm={6} md={4} key={user?.id}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h6">{user?.name}</Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      {user?.email}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
       </Grid>
 
       <Dialog open={open} onClose={handleClose}>
@@ -174,7 +179,27 @@ const Profile = () => {
           >
             <MenuItem value="User">User</MenuItem>
             <MenuItem value="Admin">Admin</MenuItem>
+            <MenuItem value="Technician">Technician</MenuItem>
           </Select>
+
+          {/* Conditionally render the repair center input if userType is Technician */}
+          {newUser.userType === "Technician" && (
+            <FormControl fullWidth>
+              <InputLabel>Repair Center</InputLabel>
+              <Select
+                value={newUser.repairCenter}
+                onChange={(e) =>
+                  setNewUser({ ...newUser, repairCenter: e.target.value })
+                }
+              >
+                {repairCenters.map((center) => (
+                  <MenuItem key={center} value={center}>
+                    {center}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

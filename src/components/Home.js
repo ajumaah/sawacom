@@ -61,7 +61,7 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="Booking" />
         </ListItem>
-        <ListItem button component="a" href="#Analytic">
+        <ListItem button component="a" href="/">
           <ListItemIcon>
             <AnalyticsIcon />
           </ListItemIcon>
@@ -76,25 +76,25 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="Repair Centre" />
         </ListItem>
-        <ListItem button component="a" href="#Groups">
+        <ListItem button component="a" href="/">
           <ListItemIcon>
             <GroupIcon />
           </ListItemIcon>
           <ListItemText primary="Groups" />
         </ListItem>
-        <ListItem button component="a" href="#Transfer">
+        <ListItem button component="a" href="/">
           <ListItemIcon>
             <MoveUpIcon />
           </ListItemIcon>
           <ListItemText primary="Transfer" />
         </ListItem>
-        <ListItem button component="a" href="#All Reports">
+        <ListItem button component="a" href="/">
           <ListItemIcon>
             <FlagIcon />
           </ListItemIcon>
           <ListItemText primary="All Reports" />
         </ListItem>
-        <ListItem button component="a" href="#Notifications">
+        <ListItem button component="a" href="/">
           <ListItemIcon>
             <NotificationsActiveIcon />
           </ListItemIcon>
@@ -109,13 +109,13 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="Profile" />
         </ListItem>
-        <ListItem button component="a" href="#Settings">
+        <ListItem button component="a" href="/">
           <ListItemIcon>
             <SettingsIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </ListItem>
-        <ListItem button component="a" href="/dist/pages/login.html">
+        <ListItem button component="a" href="/login">
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
