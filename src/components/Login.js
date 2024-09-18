@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
   Container,
@@ -31,18 +31,21 @@ function Login() {
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
-        console.log(data); // Debug: Check what the backend is returning
-        const { token, redirectUrl } = data;
-  
-        // Save the token in local storage and set it in the state
+        const { token, redirectUrl, userType, repairCenter } = data;
+
+        // Save the token and user details in local storage
         localStorage.setItem("token", token);
+        localStorage.setItem("userType", userType);
+        localStorage.setItem("repairCenter", repairCenter);
         setToken(token);
-  
-        // Route the user based on the redirectUrl
-        if (redirectUrl) {
+
+        // Redirect based on userType
+        if (userType === "Technician") {
+          router.push(`/technician-dashboard?repairCenter=${repairCenter}`);
+        } else if (redirectUrl) {
           router.push(redirectUrl);
         } else {
           setError("Unknown redirect URL");
