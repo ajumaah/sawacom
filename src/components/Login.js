@@ -20,11 +20,13 @@ function Login() {
 
   const router = useRouter();
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const handleLogin = async (event) => {
     event.preventDefault(); // Prevent form submission
     setLoading(true); // Start loading
     try {
-      const response = await fetch(`${SERVER_URL}/login`, {
+      const response = await fetch(`${backendUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

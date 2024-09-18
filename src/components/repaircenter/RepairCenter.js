@@ -21,11 +21,13 @@ const RepairCenterDashboard = () => {
   const [selectedRepairCenter, setSelectedRepairCenter] = useState("");
   const [phones, setPhones] = useState([]);
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   useEffect(() => {
     // Fetch repair centers from API
     const fetchRepairCenters = async () => {
       try {
-        const response = await fetch(`${SERVER_URL}/dispatch`);
+        const response = await fetch(`${backendUrl}/dispatch`);
         const data = await response.json();
         console.log(data); // Log to inspect the data structure
 

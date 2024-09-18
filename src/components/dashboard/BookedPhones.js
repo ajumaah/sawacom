@@ -23,9 +23,11 @@ const BookedPhonesTable = () => {
   const [selectedPhone, setSelectedPhone] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   useEffect(() => {
     // Fetch data from the /booked API
-    fetch(`${SERVER_URL}/booking`)
+    fetch(`${backendUrl}/booking`)
       .then((response) => response.json())
       .then((data) => {
         setBookedPhones(data);

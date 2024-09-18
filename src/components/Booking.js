@@ -19,6 +19,8 @@ function BookingPage() {
   const [dialogMessage, setDialogMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const handleNext = () => {
     setStep(prevStep => prevStep + 1);
   };
@@ -39,7 +41,7 @@ function BookingPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${SERVER_URL}/booking`, {
+      const response = await fetch(`${backendUrl}/booking`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -29,6 +29,8 @@ const DispatchDialog = ({ open, onClose, phone }) => {
 
   if (!phone) return null; // Return null if no phone is selected
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -40,7 +42,7 @@ const DispatchDialog = ({ open, onClose, phone }) => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`${SERVER_URL}/dispatch`, {
+      const response = await fetch(`${backendUrl}/dispatch`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

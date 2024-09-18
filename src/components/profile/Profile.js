@@ -34,11 +34,14 @@ const Profile = () => {
   });
   const [isFetching, setIsFetching] = useState(true); // State for checking if fetching is in progress
   const repairCenters = ["Oppo service Center","Samsung Repair Center", "Nokia Repair Center", "Neon Repair Center", "Vivo Repair Center", "Tecno RepairCenter"]; // Sample repair centers
+ 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   // Fetch users from API
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(`${SERVER_URL}/users`);
+        const response = await fetch(`${backendUrl}/users`);
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -66,7 +69,7 @@ const Profile = () => {
   const handleCreateUser = async () => {
     setLoading(true); // Start loading
     try {
-      const response = await fetch(`${SERVER_URL}/users`, {
+      const response = await fetch(`${backendUrl}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
