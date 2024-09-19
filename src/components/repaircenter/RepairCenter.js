@@ -22,6 +22,7 @@ const RepairCenterDashboard = () => {
   const [phones, setPhones] = useState([]);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  console.log('Backend URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
 
   useEffect(() => {
     // Fetch repair centers from API
@@ -44,7 +45,7 @@ const RepairCenterDashboard = () => {
     };
     fetchRepairCenters();
   }, []);
-
+ 
   useEffect(() => {
     // Fetch phones when selectedRepairCenter changes
     const fetchPhones = async () => {
