@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Dashboard from "@/components/dashboard/Dashboard";
-import { SERVER_URL } from "../../config";
+// import { SERVER_URL } from "../../config";
 
 const DashboardPage = () => {
   const [bookedPhones, setBookedPhones] = useState([]);
   const [dispatchedPhones, setDispatchedPhones] = useState([]);
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   useEffect(() => {
     // Fetch data from the /booking API
-    fetch(`${SERVER_URL}/booking`)
+    fetch(`${backendUrl}/booking`)
       .then((response) => response.json())
       .then((data) => setBookedPhones(data))
       .catch((error) => console.error("Error fetching booked phones:", error));
@@ -16,7 +18,7 @@ const DashboardPage = () => {
 
   useEffect(() => {
     // Fetch data from the /booking API
-    fetch(`${SERVER_URL}/dispatch`)
+    fetch(`${backendUrl}/dispatch`)
       .then((response) => response.json())
       .then((data) => setDispatchedPhones(data))
       .catch((error) => console.error("Error fetching booked phones:", error));

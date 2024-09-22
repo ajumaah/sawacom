@@ -14,7 +14,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 
 const DispatchDialog = ({ open, onClose, phone }) => {
   const [formData, setFormData] = useState({

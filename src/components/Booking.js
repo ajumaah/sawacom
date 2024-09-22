@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Grid, Box, Typography, TextField, Button, FormLabel, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress } from '@mui/material';
 import { MobileFriendly } from '@mui/icons-material';
 import jsPDF from 'jspdf';
-import { SERVER_URL } from '../../config';
+// import { SERVER_URL } from '../../config';
 
 function BookingPage() {
   const [step, setStep] = useState(1);

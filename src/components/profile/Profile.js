@@ -19,7 +19,7 @@ import {
   Skeleton,
   FormControl, // Import Skeleton
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 
 const Profile = () => {
   const [users, setUsers] = useState([]);

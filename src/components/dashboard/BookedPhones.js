@@ -12,7 +12,7 @@ import {
   CircularProgress,
   Button,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 import DispatchDialog from "./DispatchDialog";
 
 const BookedPhonesTable = () => {

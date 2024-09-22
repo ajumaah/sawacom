@@ -4,7 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
-import { SERVER_URL } from '../../config';
+// import { SERVER_URL } from '../../config';
 
 const options = [
   'Delete',

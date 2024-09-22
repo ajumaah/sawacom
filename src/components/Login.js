@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
-import { SERVER_URL } from "../../config";
+// import { SERVER_URL } from "../../config";
 
 function Login() {
   const [email, setEmail] = useState("");
