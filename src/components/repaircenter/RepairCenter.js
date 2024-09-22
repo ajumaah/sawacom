@@ -52,7 +52,7 @@ const RepairCenterDashboard = () => {
       if (selectedRepairCenter) {
         try {
           const response = await fetch(
-            `${SERVER_URL}/dispatch?center=${selectedRepairCenter}`
+            `${backendUrl}/dispatch?center=${selectedRepairCenter}`
           );
           const data = await response.json();
           console.log(data); // Log data to inspect the structure
