@@ -14,7 +14,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 
 const RepairCenterDashboard = () => {
   const [repairCenters, setRepairCenters] = useState([]);
@@ -22,7 +22,6 @@ const RepairCenterDashboard = () => {
   const [phones, setPhones] = useState([]);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  console.log('Backend URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
 
   useEffect(() => {
     // Fetch repair centers from API
