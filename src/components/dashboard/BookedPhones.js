@@ -24,7 +24,7 @@ const BookedPhonesTable = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-
+  console.log('Backend URL:', backendUrl);
   useEffect(() => {
     // Fetch data from the /booked API
     fetch(`${backendUrl}/booking`)
