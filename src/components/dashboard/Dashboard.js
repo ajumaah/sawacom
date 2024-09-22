@@ -5,9 +5,9 @@ import PhoneModelsGraph from "./PhoneModelsGraph";
 const Dashboard = ({
   bookedPhones = [],
   dispatchedPhones = [],
-  repairedPhones = [],
-  collectedPhones = [],
-  pendingCollection = [],
+  // repairedPhones = [],
+  // collectedPhones = [],
+  // pendingCollection = [],
 }) => {
   return (
     <>
