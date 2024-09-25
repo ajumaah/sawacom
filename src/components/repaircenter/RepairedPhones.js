@@ -13,11 +13,12 @@ import {
   Button,
 } from "@mui/material";
 // import { SERVER_URL } from "../../../config";
-import DispatchDialog from "./DispatchDialog";
-import { SERVER_URL } from "../../../config";
 
-const BookedPhonesTable = () => {
-  const [bookedPhones, setBookedPhones] = useState([]);
+import { SERVER_URL } from "../../../config";
+import DispatchDialog from "../dashboard/DispatchDialog";
+
+const RepairedPhones = () => {
+  const [repairedPhones, setRepairedPhones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -27,15 +28,15 @@ const BookedPhonesTable = () => {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   console.log('Backend URL:', backendUrl);
   useEffect(() => {
-    // Fetch data from the /booked API
-    fetch(`${SERVER_URL}/booking`)
+    // Fetch data from the /repair API
+    fetch(`${SERVER_URL}/repair`)
       .then((response) => response.json())
       .then((data) => {
-        setBookedPhones(data);
+        setRepairedPhones(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching booked phones:", error);
+        console.error("Error fetching repaired phones:", error);
         setLoading(false);
       });
   }, []);
@@ -82,8 +83,9 @@ const BookedPhonesTable = () => {
               <TableCell>Phone Model</TableCell>
               <TableCell>IMEI</TableCell>
               <TableCell>Phone Issues</TableCell>
-              <TableCell>Date Booked</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Repair Comments</TableCell>
+              <TableCell>Spare Part Used</TableCell>
+              <TableCell>Dispatch</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -93,8 +95,8 @@ const BookedPhonesTable = () => {
                   <CircularProgress />
                 </TableCell>
               </TableRow>
-            ) : bookedPhones.length > 0 ? (
-              bookedPhones.map((phone, index) => (
+            ) : repairedPhones.length > 0 ? (
+              repairedPhones.map((phone, index) => (
                 <TableRow key={index}>
                   <TableCell>{phone.customerName}</TableCell>
                   <TableCell>{phone.phoneNumber}</TableCell>
@@ -102,7 +104,8 @@ const BookedPhonesTable = () => {
                   <TableCell>{phone.phoneModel}</TableCell>
                   <TableCell>{phone.imei}</TableCell>
                   <TableCell>{phone.phoneIssues}</TableCell>
-                  <TableCell>{formatDate(phone.createdAt)}</TableCell>
+                  <TableCell>{phone.repairComments}</TableCell>
+                  <TableCell>{phone.sparePartUsed}</TableCell>
                   <TableCell>
                     <Button
                       variant="contained"
@@ -117,7 +120,7 @@ const BookedPhonesTable = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={8} align="center">
-                  No booked phones found.
+                  No Repaired phones found.
                 </TableCell>
               </TableRow>
             )}
@@ -126,7 +129,7 @@ const BookedPhonesTable = () => {
         <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
           <TablePagination
             component="div"
-            count={bookedPhones.length}
+            count={repairedPhones.length}
             page={page}
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
@@ -145,4 +148,4 @@ const BookedPhonesTable = () => {
   );
 };
 
-export default BookedPhonesTable;
+export default RepairedPhones;
