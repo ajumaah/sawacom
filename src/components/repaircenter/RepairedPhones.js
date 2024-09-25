@@ -13,8 +13,7 @@ import {
   Button,
 } from "@mui/material";
 // import { SERVER_URL } from "../../../config";
-
-import DispatchDialog from "../dashboard/DispatchDialog";
+import ReturnDialog from "./ReturnDialog";
 
 const RepairedPhones = () => {
   const [repairedPhones, setRepairedPhones] = useState([]);
@@ -138,7 +137,7 @@ const RepairedPhones = () => {
       </TableContainer>
 
       {/* Dispatch Dialog */}
-      <DispatchDialog
+      <ReturnDialog
         open={openDialog}
         onClose={handleCloseDialog}
         phone={selectedPhone}

@@ -5,7 +5,7 @@ import PhoneModelsGraph from "./PhoneModelsGraph";
 const Dashboard = ({
   bookedPhones = [],
   dispatchedPhones = [],
-  // repairedPhones = [],
+  repairedPhones = [],
   // collectedPhones = [],
   // pendingCollection = [],
 }) => {
@@ -91,6 +91,11 @@ const Dashboard = ({
           </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <Link
+            href="/returnedPhones"
+            passHref
+            style={{ textDecoration: "none" }}
+          >
           <Paper
             elevation={3}
             style={{ padding: "20px", backgroundColor: "#84ffff" }}
@@ -117,11 +122,12 @@ const Dashboard = ({
                       marginRight: "10px",
                     }}
                   >
-                    {dispatchedPhones.length}
+                    {repairedPhones.length}
                   </Box>
                  
                 </Box>
           </Paper>
+          </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Paper

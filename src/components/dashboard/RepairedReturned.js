@@ -11,30 +11,30 @@ import {
   Box,
   CircularProgress,
   Button,
+  Typography,
 } from "@mui/material";
-// import { SERVER_URL } from "../../../config";
 import DispatchDialog from "./DispatchDialog";
+import { SERVER_URL } from "../../../config";
 
-const BookedPhonesTable = () => {
-  const [bookedPhones, setBookedPhones] = useState([]);
+const RepairedReturned = () => {
+  const [returnedPhones, setReturnedPhones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedPhone, setSelectedPhone] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  console.log("Backend URL:", backendUrl);
+ 
   useEffect(() => {
-    // Fetch data from the /booked API
-    fetch(`${backendUrl}/booking`)
+    // Fetch data from the /repair/get/returned API
+    fetch(`${SERVER_URL}/repair/returned`)
       .then((response) => response.json())
       .then((data) => {
-        setBookedPhones(data);
+        setReturnedPhones(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching booked phones:", error);
+        console.error("Error fetching returned phones:", error);
         setLoading(false);
       });
   }, []);
@@ -71,7 +71,9 @@ const BookedPhonesTable = () => {
 
   return (
     <div>
+         <Typography variant="h5">Repaired Items</Typography>
       <TableContainer component={Paper}>
+       
         <Table>
           <TableHead style={{ padding: "20px", backgroundColor: "#64ffda" }}>
             <TableRow>
@@ -81,19 +83,21 @@ const BookedPhonesTable = () => {
               <TableCell>Phone Model</TableCell>
               <TableCell>IMEI</TableCell>
               <TableCell>Phone Issues</TableCell>
-              <TableCell>Date Booked</TableCell>
+              <TableCell>Comments</TableCell>
+              <TableCell>Spare Part Used</TableCell>
+              <TableCell>Waybill Number</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={8} align="center">
+                <TableCell colSpan={10} align="center">
                   <CircularProgress />
                 </TableCell>
               </TableRow>
-            ) : bookedPhones.length > 0 ? (
-              bookedPhones.map((phone, index) => (
+            ) : returnedPhones.length > 0 ? (
+              returnedPhones.map((phone, index) => (
                 <TableRow key={index}>
                   <TableCell>{phone.customerName}</TableCell>
                   <TableCell>{phone.phoneNumber}</TableCell>
@@ -101,23 +105,26 @@ const BookedPhonesTable = () => {
                   <TableCell>{phone.phoneModel}</TableCell>
                   <TableCell>{phone.imei}</TableCell>
                   <TableCell>{phone.phoneIssues}</TableCell>
-                  <TableCell>{formatDate(phone.createdAt)}</TableCell>
+                  <TableCell>{phone.repairComments}</TableCell>
+                  <TableCell>{phone.sparePartUsed}</TableCell>
+                  <TableCell>{phone.waybillNumber}</TableCell>
                   <TableCell>
                     <Button
                       variant="contained"
                       color="primary"
+                       size="small"
                       onClick={() => handleOpenDialog(phone)}
-                      style={{  hight: "10px" }}
+                      style={{ textTransform: 'none'}} 
                     >
-                      Create Dispatch 
-                    </Button>
+                     Collection                  
+                     </Button>
                   </TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={8} align="center">
-                  No booked phones found.
+                <TableCell colSpan={10} align="center">
+                  No record available.
                 </TableCell>
               </TableRow>
             )}
@@ -126,7 +133,7 @@ const BookedPhonesTable = () => {
         <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
           <TablePagination
             component="div"
-            count={bookedPhones.length}
+            count={returnedPhones.length}
             page={page}
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
@@ -145,4 +152,4 @@ const BookedPhonesTable = () => {
   );
 };
 
-export default BookedPhonesTable;
+export default RepairedReturned;
