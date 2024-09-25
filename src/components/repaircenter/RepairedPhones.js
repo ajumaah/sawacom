@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 // import { SERVER_URL } from "../../../config";
 
-import { SERVER_URL } from "../../../config";
 import DispatchDialog from "../dashboard/DispatchDialog";
 
 const RepairedPhones = () => {
@@ -29,7 +28,7 @@ const RepairedPhones = () => {
   console.log('Backend URL:', backendUrl);
   useEffect(() => {
     // Fetch data from the /repair API
-    fetch(`${SERVER_URL}/repair`)
+    fetch(`${backendUrl}/repair`)
       .then((response) => response.json())
       .then((data) => {
         setRepairedPhones(data);

@@ -28,7 +28,7 @@ const BookedPhonesTable = () => {
   console.log('Backend URL:', backendUrl);
   useEffect(() => {
     // Fetch data from the /booked API
-    fetch(`${SERVER_URL}/booking`)
+    fetch(`${backendUrl}/booking`)
       .then((response) => response.json())
       .then((data) => {
         setBookedPhones(data);

@@ -20,7 +20,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 
 const RepairCenterDashboard = () => {
   const [repairCenters, setRepairCenters] = useState([]);
@@ -44,7 +44,7 @@ const RepairCenterDashboard = () => {
   useEffect(() => {
     const fetchRepairCenters = async () => {
       try {
-        const response = await fetch(`${SERVER_URL}/dispatch`);
+        const response = await fetch(`${backendUrl}/dispatch`);
         const data = await response.json();
         const uniqueCenters = Array.from(
           new Set(data.map((item) => item.repairCenterName))
@@ -63,7 +63,7 @@ const RepairCenterDashboard = () => {
       if (selectedRepairCenter) {
         try {
           const response = await fetch(
-            `${SERVER_URL}/dispatch?center=${selectedRepairCenter}`
+            `${backendUrl}/dispatch?center=${selectedRepairCenter}`
           );
           const data = await response.json();
           setPhones(data);
@@ -124,7 +124,7 @@ const RepairCenterDashboard = () => {
   const handleSubmitRepair = async () => {
     if (selectedPhone) {
       try {
-        const response = await fetch(`${SERVER_URL}/repair/${selectedPhone._id}`, {
+        const response = await fetch(`${backendUrl}/repair/${selectedPhone._id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

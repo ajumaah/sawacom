@@ -14,7 +14,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 
 
 const DispatchDialog = ({ open, onClose, phone }) => {
@@ -43,7 +43,7 @@ const DispatchDialog = ({ open, onClose, phone }) => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`${SERVER_URL}/dispatch`, {
+      const response = await fetch(`${backendUrl}/dispatch`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
