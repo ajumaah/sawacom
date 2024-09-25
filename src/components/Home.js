@@ -95,13 +95,13 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary="Work in Progress" />
           </ListItem>
-          <ListItem button component="a" href="/repaircenter/repaired" sx={{ pl: 4 }}>
+          <ListItem button component="a" href="/repaired" sx={{ pl: 4 }}>
             <ListItemIcon>
               <ContactsIcon />
             </ListItemIcon>
             <ListItemText primary="Repaired" />
           </ListItem>
-          <ListItem button component="a" href="/repaircenter/dispatched" sx={{ pl: 4 }}>
+          <ListItem button component="a" href="/dispatched" sx={{ pl: 4 }}>
             <ListItemIcon>
               <ContactsIcon />
             </ListItemIcon>
