@@ -20,6 +20,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import { SERVER_URL } from "../../../config";
 // import { SERVER_URL } from "../../../config";
 
 const RepairCenterDashboard = () => {
@@ -44,7 +45,7 @@ const RepairCenterDashboard = () => {
   useEffect(() => {
     const fetchRepairCenters = async () => {
       try {
-        const response = await fetch(`${backendUrl}/dispatch`);
+        const response = await fetch(`${SERVER_URL}/dispatch`);
         const data = await response.json();
         const uniqueCenters = Array.from(
           new Set(data.map((item) => item.repairCenterName))

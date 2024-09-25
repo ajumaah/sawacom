@@ -89,7 +89,13 @@ const Sidebar = () => {
       </ListItem>
       <Collapse in={openRepairCenter} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button component="a" href="/repaired" sx={{ pl: 4 }}>
+        <ListItem button component="a" href="/repaircenter" sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <ContactsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Work in Progress" />
+          </ListItem>
+          <ListItem button component="a" href="/repaircenter/repaired" sx={{ pl: 4 }}>
             <ListItemIcon>
               <ContactsIcon />
             </ListItemIcon>
