@@ -45,7 +45,7 @@ const RepairCenterDashboard = () => {
   useEffect(() => {
     const fetchRepairCenters = async () => {
       try {
-        const response = await fetch(`${SERVER_URL}/dispatch`);
+        const response = await fetch(`${backendUrl}/dispatch`);
         const data = await response.json();
         const uniqueCenters = Array.from(
           new Set(data.map((item) => item.repairCenterName))
