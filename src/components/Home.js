@@ -101,7 +101,7 @@ const Sidebar = () => {
             </ListItemIcon>
             <ListItemText primary="Repaired" />
           </ListItem>
-          <ListItem button component="a" href="/dispatched" sx={{ pl: 4 }}>
+          <ListItem button component="a" href="/returnedPhones" sx={{ pl: 4 }}>
             <ListItemIcon>
               <ContactsIcon />
             </ListItemIcon>

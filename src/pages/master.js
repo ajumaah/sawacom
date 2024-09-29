@@ -27,7 +27,7 @@ const DashboardPage = () => {
   }, []);
   useEffect(() => {
     // Fetch data from the /booking API
-    fetch(`${SERVER_URL}/repair/returned`)
+    fetch(`${backendUrl}/repair/returned`)
       .then((response) => response.json())
       .then((data) => setRepairedPhones(data))
       .catch((error) => console.error("Error fetching repaired phones:", error));
