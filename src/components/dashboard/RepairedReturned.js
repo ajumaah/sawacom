@@ -24,10 +24,11 @@ const RepairedReturned = () => {
   const [selectedPhone, setSelectedPhone] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
 
- 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   useEffect(() => {
     // Fetch data from the /repair/get/returned API
-    fetch(`${SERVER_URL}/repair/returned`)
+    fetch(`${backendUrl}/repair/returned`)
       .then((response) => response.json())
       .then((data) => {
         setReturnedPhones(data);
