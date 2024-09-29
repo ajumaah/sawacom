@@ -42,7 +42,7 @@ const ReturnDialog = ({ open, onClose, phone }) => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`${SERVER_URL}/repair/return/${phone._id}`, {
+      const response = await fetch(`${backendUrl}/repair/return/${phone._id}`, {
         method: "PUT", // Use PUT method
         headers: {
           "Content-Type": "application/json",
