@@ -27,7 +27,7 @@ const RepairedPhones = () => {
   console.log('Backend URL:', backendUrl);
   useEffect(() => {
     // Fetch data from the /repair API
-    fetch(`${backendUrl}/repair`)
+    fetch(`${backendUrl}/repair/repaired`)
       .then((response) => response.json())
       .then((data) => {
         setRepairedPhones(data);
