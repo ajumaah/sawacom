@@ -1,3 +1,12 @@
+// Export the repairCenters array
+export const repairCenters = [
+  "Oppo service Center",
+  "Samsung Repair Center",
+  "Nokia Repair Center",
+  "Neon Repair Center",
+  "Vivo Repair Center",
+  "Tecno RepairCenter"
+];
 import React, { useState } from "react";
 import {
   Dialog,

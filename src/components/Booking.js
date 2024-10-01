@@ -1,32 +1,51 @@
-import React, { useState } from 'react';
-import { Container, Grid, Box, Typography, TextField, Button, FormLabel, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress } from '@mui/material';
-import { MobileFriendly } from '@mui/icons-material';
-import jsPDF from 'jspdf';
+import React, { useState } from "react";
+import {
+  Container,
+  Grid,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  FormLabel,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import { MobileFriendly } from "@mui/icons-material";
+import jsPDF from "jspdf";
+import { repairCenters } from "./dashboard/DispatchDialog";
 // import { SERVER_URL } from '../../config';
 
 function BookingPage() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    customerName: '',
-    phoneNumber: '',
-    email: '',
-    phoneModel: '',
-    phoneMake: '',
-    imei: '',
-    phoneIssues: '',
+    customerName: "",
+    phoneNumber: "",
+    email: "",
+    phoneModel: "",
+    phoneMake: "",
+    imei: "",
+    phoneIssues: "",
   });
   const [open, setOpen] = useState(false);
-  const [dialogMessage, setDialogMessage] = useState('');
+  const [dialogMessage, setDialogMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const handleNext = () => {
-    setStep(prevStep => prevStep + 1);
+    setStep((prevStep) => prevStep + 1);
   };
 
   const handleBack = () => {
-    setStep(prevStep => prevStep - 1);
+    setStep((prevStep) => prevStep - 1);
   };
 
   const handleChange = (e) => {
@@ -42,13 +61,13 @@ function BookingPage() {
 
     try {
       const response = await fetch(`${backendUrl}/booking`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      
+
       const text = await response.text();
 
       if (response.ok) {
@@ -58,11 +77,11 @@ function BookingPage() {
          `);
         setOpen(true);
       } else {
-        setDialogMessage('Booking failed. Please try again.');
+        setDialogMessage("Booking failed. Please try again.");
         setOpen(true);
       }
     } catch (error) {
-      setDialogMessage('An error occurred while submitting your booking.');
+      setDialogMessage("An error occurred while submitting your booking.");
       setOpen(true);
     } finally {
       setIsLoading(false);
@@ -76,7 +95,7 @@ function BookingPage() {
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    doc.text('Sawacom Phone Booking', 10, 10);
+    doc.text("Sawacom Phone Booking", 10, 10);
     doc.text(`Name: ${formData.customerName}`, 10, 20);
     doc.text(`Phone Number: ${formData.phoneNumber}`, 10, 30);
     doc.text(`Email: ${formData.email}`, 10, 40);
@@ -85,7 +104,7 @@ function BookingPage() {
     doc.text(`IMEI: ${formData.imei}`, 10, 70);
     doc.text(`Phone Issues: ${formData.phoneIssues}`, 10, 80);
 
-    doc.save('booking-details.pdf');
+    doc.save("booking-details.pdf");
   };
 
   const renderStep = () => {
@@ -94,34 +113,34 @@ function BookingPage() {
         return (
           <>
             <Box mb={2}>
-              <TextField 
-                fullWidth 
-                label="Customer Name" 
-                variant="outlined" 
-                required 
+              <TextField
+                fullWidth
+                label="Customer Name"
+                variant="outlined"
+                required
                 name="customerName"
                 value={formData.customerName}
                 onChange={handleChange}
               />
             </Box>
             <Box mb={2}>
-              <TextField 
-                fullWidth 
-                label="Phone Number" 
-                variant="outlined" 
-                type="tel" 
-                required 
+              <TextField
+                fullWidth
+                label="Phone Number"
+                variant="outlined"
+                type="tel"
+                required
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
               />
             </Box>
             <Box mb={2}>
-              <TextField 
-                fullWidth 
-                label="Email" 
-                variant="outlined" 
-                type="email" 
+              <TextField
+                fullWidth
+                label="Email"
+                variant="outlined"
+                type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -132,33 +151,33 @@ function BookingPage() {
       case 2:
         return (
           <>
-           <Box mb={2}>
-              <TextField 
-                fullWidth 
-                label="Phone Make" 
-                variant="outlined" 
-                required 
+            <Box mb={2}>
+              <TextField
+                fullWidth
+                label="Phone Make"
+                variant="outlined"
+                required
                 name="phoneMake"
                 value={formData.phoneMake}
                 onChange={handleChange}
               />
             </Box>
             <Box mb={2}>
-              <TextField 
-                fullWidth 
-                label="Phone Model" 
-                variant="outlined" 
-                required 
+              <TextField
+                fullWidth
+                label="Phone Model"
+                variant="outlined"
+                required
                 name="phoneModel"
                 value={formData.phoneModel}
                 onChange={handleChange}
               />
             </Box>
             <Box mb={2}>
-              <TextField 
-                fullWidth 
-                label="IMEI" 
-                variant="outlined" 
+              <TextField
+                fullWidth
+                label="IMEI"
+                variant="outlined"
                 name="imei"
                 value={formData.imei}
                 onChange={handleChange}
@@ -171,14 +190,31 @@ function BookingPage() {
           <>
             <Box mb={2}>
               <FormLabel component="legend">Phone Issues</FormLabel>
-              <TextField 
-                fullWidth 
-                label="Write the problem description here" 
-                variant="outlined" 
+              <TextField
+                fullWidth
+                label="Write the problem description here"
+                variant="outlined"
                 name="phoneIssues"
                 value={formData.phoneIssues}
                 onChange={handleChange}
               />
+            </Box>
+            <Box mb={2}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>Repair Center</InputLabel>
+                <Select
+                  label="Repair Center"
+                  name="repairCenterName"
+                  value={formData.repairCenterName}
+                  onChange={handleChange}
+                >
+                  {repairCenters.map((center) => (
+                    <MenuItem key={center} value={center}>
+                      {center}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Box>
           </>
         );
@@ -189,7 +225,7 @@ function BookingPage() {
 
   return (
     <Container maxWidth="sm">
-      <Box sx={{ mt: 8, p: 4, border: '1px solid #ccc', borderRadius: 4 }}>
+      <Box sx={{ mt: 8, p: 4, border: "1px solid #ccc", borderRadius: 4 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} textAlign="center">
             <MobileFriendly fontSize="large" />
@@ -199,7 +235,7 @@ function BookingPage() {
           </Grid>
           <Grid item xs={12} textAlign="center">
             <Typography variant="body2">
-              Fill all the fields marked <em style={{ color: 'red' }}>*</em>
+              Fill all the fields marked <em style={{ color: "red" }}>*</em>
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -217,8 +253,13 @@ function BookingPage() {
                   </Button>
                 )}
                 {step === 3 && (
-                  <Button type="submit" variant="contained" color="primary" disabled={isLoading}>
-                    {isLoading ? <CircularProgress size={24} /> : 'Submit'}
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? <CircularProgress size={24} /> : "Submit"}
                   </Button>
                 )}
               </Grid>
@@ -230,9 +271,7 @@ function BookingPage() {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Booking Status</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {dialogMessage}
-          </DialogContentText>
+          <DialogContentText>{dialogMessage}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
