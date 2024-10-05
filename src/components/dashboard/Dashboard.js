@@ -6,7 +6,8 @@ const Dashboard = ({
   bookedPhones = [],
   dispatchedPhones = [],
   repairedPhones = [],
-  // collectedPhones = [],
+  repaircenters = [],
+  phoneModelsData = []
   // pendingCollection = [],
 }) => {
   return (
@@ -196,11 +197,16 @@ const Dashboard = ({
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <Link
+            href="/repaircenters"
+            passHref
+            style={{ textDecoration: "none" }}
+          >
           <Paper
             elevation={3}
             style={{ padding: "20px", backgroundColor: "#a7ffeb" }}
           >
-            <Typography variant="h5">Others</Typography>
+            <Typography variant="h5">Repair Centers</Typography>
             <Box
                   sx={{
                     display: "flex",
@@ -208,7 +214,7 @@ const Dashboard = ({
                     marginTop: "10px",
                   }}
                 >
-                   <Typography variant="body1" sx={{ mr: 1 }}>Others: </Typography>
+                   <Typography variant="body1" sx={{ mr: 1 }}>Repair Centers: </Typography>
                   <Box
                     sx={{
                       width: "20px",
@@ -222,17 +228,18 @@ const Dashboard = ({
                       marginRight: "10px",
                     }}
                   >
-                    {dispatchedPhones.length}
+                    {repaircenters.length}
                   </Box>
                  
                 </Box>
           </Paper>
+          </Link>
         </Grid>
       </Grid>
       <Grid continer>
         <Grid item xs={12} md={6} lg={4} sx={{ mt: 4 }}>
           <Paper elevation={3} style={{ padding: "20px" }}>
-            <PhoneModelsGraph />
+          <PhoneModelsGraph phoneModelsData={phoneModelsData} />
           </Paper>
         </Grid>
       </Grid>

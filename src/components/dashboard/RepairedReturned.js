@@ -13,8 +13,8 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import DispatchDialog from "./DispatchDialog";
 import { SERVER_URL } from "../../../config";
+import CollectionDialog from "./CollectionDialog";
 
 const RepairedReturned = () => {
   const [returnedPhones, setReturnedPhones] = useState([]);
@@ -28,7 +28,7 @@ const RepairedReturned = () => {
 
   useEffect(() => {
     // Fetch data from the /repair/get/returned API
-    fetch(`${backendUrl}/repair/returned`)
+    fetch(`${SERVER_URL}/repair/returned`)
       .then((response) => response.json())
       .then((data) => {
         setReturnedPhones(data);
@@ -144,7 +144,7 @@ const RepairedReturned = () => {
       </TableContainer>
 
       {/* Dispatch Dialog */}
-      <DispatchDialog
+      <CollectionDialog
         open={openDialog}
         onClose={handleCloseDialog}
         phone={selectedPhone}

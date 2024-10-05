@@ -7,6 +7,7 @@ const DashboardPage = () => {
   const [bookedPhones, setBookedPhones] = useState([]);
   const [dispatchedPhones, setDispatchedPhones] = useState([]);
   const [repairedPhones, setRepairedPhones] = useState([]);
+  const [repaircenters, setRepaircenters] = useState([]);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -32,12 +33,20 @@ const DashboardPage = () => {
       .then((data) => setRepairedPhones(data))
       .catch((error) => console.error("Error fetching repaired phones:", error));
   }, []);
+  useEffect(() => {
+    // Fetch data from the /booking API
+    fetch(`${SERVER_URL}/repaircenters`)
+      .then((response) => response.json())
+      .then((data) => setRepaircenters(data))
+      .catch((error) => console.error("Error fetching Repair centers:", error));
+  }, []);
   return (
     <div>
       <Dashboard
         bookedPhones={bookedPhones}
         dispatchedPhones={dispatchedPhones}
         repairedPhones={repairedPhones}
+        repaircenters={repaircenters}
       />
     </div>
   );

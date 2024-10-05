@@ -2,16 +2,16 @@ import React from 'react';
 import { Grid, Paper, Typography } from '@mui/material';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const phoneModelsData = [
-  { name: 'Nokia', count: 400 },
-  { name: 'Samsung', count: 300 },
-  { name: 'Oppo', count: 200 },
-  { name: 'Tecno', count: 278 },
-  { name: 'Vivo', count: 189 },
-  { name: 'Neon', count: 239 }
-];
+// const phoneModelsData = [
+//   { name: 'Nokia', count: 400 },
+//   { name: 'Samsung', count: 300 },
+//   { name: 'Oppo', count: 200 },
+//   { name: 'Tecno', count: 278 },
+//   { name: 'Vivo', count: 189 },
+//   { name: 'Neon', count: 239 }
+// ];
 
-const PhoneModelsGraph = () => {
+const PhoneModelsGraph = ({ phoneModelsData }) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={8} lg={10}>

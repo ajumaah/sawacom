@@ -15,6 +15,8 @@ import {
 // import { SERVER_URL } from "../../../config";
 import DispatchDialog from "./DispatchDialog";
 
+import { SERVER_URL } from "../../../config";
+
 const BookedPhonesTable = () => {
   const [bookedPhones, setBookedPhones] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,16 +24,34 @@ const BookedPhonesTable = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedPhone, setSelectedPhone] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [phoneModelsData, setPhoneModelsData] = useState([]);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   console.log("Backend URL:", backendUrl);
   useEffect(() => {
-    // Fetch data from the /booked API
-    fetch(`${backendUrl}/booking`)
+    // Fetch data from the /booking API
+    fetch(`${SERVER_URL}/booking`)
       .then((response) => response.json())
       .then((data) => {
         setBookedPhones(data);
         setLoading(false);
+  
+        // Group and count phone models
+        const modelCounts = data.reduce((acc, phone) => {
+          const model = phone.phoneModel;
+          if (model) {
+            acc[model] = (acc[model] || 0) + 1;
+          }
+          return acc;
+        }, {});
+  
+        // Convert object to array format
+        const modelsData = Object.entries(modelCounts).map(([name, count]) => ({
+          name,
+          count,
+        }));
+  
+        setPhoneModelsData(modelsData); // Set phoneModelsData here
       })
       .catch((error) => {
         console.error("Error fetching booked phones:", error);
@@ -68,6 +88,7 @@ const BookedPhonesTable = () => {
     setOpenDialog(false);
     setSelectedPhone(null);
   };
+  
 
   return (
     <div>
