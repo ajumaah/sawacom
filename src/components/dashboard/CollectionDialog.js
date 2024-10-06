@@ -7,7 +7,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 
 const CollectionDialog = ({ open, onClose, phone }) => {
   const [formData, setFormData] = useState({
@@ -49,7 +49,7 @@ const CollectionDialog = ({ open, onClose, phone }) => {
 
   const handleCollection = async () => {
     try {
-      const response = await fetch(`${SERVER_URL}/repair/collect/${phone._id}`, {
+      const response = await fetch(`${backendUrl}/repair/collect/${phone._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

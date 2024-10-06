@@ -13,7 +13,6 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
 import CollectionDialog from "./CollectionDialog";
 
 const RepairedReturned = () => {
@@ -28,7 +27,7 @@ const RepairedReturned = () => {
 
   useEffect(() => {
     // Fetch data from the /repair/get/returned API
-    fetch(`${SERVER_URL}/repair/returned`)
+    fetch(`${backendUrl}/repair/returned`)
       .then((response) => response.json())
       .then((data) => {
         setReturnedPhones(data);

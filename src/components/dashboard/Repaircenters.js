@@ -17,7 +17,7 @@ import {
   Paper,
   Box,
 } from "@mui/material";
-import { SERVER_URL } from "../../../config";
+
 
 const RepairCenters = () => {
   const [repairCenters, setRepairCenters] = useState([]);
@@ -32,7 +32,7 @@ const RepairCenters = () => {
   useEffect(() => {
     const fetchRepairCenters = async () => {
       try {
-        const response = await fetch(`${SERVER_URL}/repaircenters`);
+        const response = await fetch(`${backendUrl}/repaircenters`);
         if (!response.ok) {
           throw new Error("Failed to fetch repair centers");
         }
@@ -63,7 +63,7 @@ const RepairCenters = () => {
   // Submit new repair center
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`${SERVER_URL}/repaircenters`, {
+      const response = await fetch(`${backendUrl}/repaircenters`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

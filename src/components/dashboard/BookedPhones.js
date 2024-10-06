@@ -15,7 +15,7 @@ import {
 // import { SERVER_URL } from "../../../config";
 import DispatchDialog from "./DispatchDialog";
 
-import { SERVER_URL } from "../../../config";
+// import { SERVER_URL } from "../../../config";
 
 const BookedPhonesTable = () => {
   const [bookedPhones, setBookedPhones] = useState([]);
@@ -30,7 +30,7 @@ const BookedPhonesTable = () => {
   console.log("Backend URL:", backendUrl);
   useEffect(() => {
     // Fetch data from the /booking API
-    fetch(`${SERVER_URL}/booking`)
+    fetch(`${backendUrl}/booking`)
       .then((response) => response.json())
       .then((data) => {
         setBookedPhones(data);

@@ -7,7 +7,8 @@ const Dashboard = ({
   dispatchedPhones = [],
   repairedPhones = [],
   repaircenters = [],
-  phoneModelsData = []
+  phoneModelsData = [],
+  collectedPhones = []
   // pendingCollection = [],
 }) => {
   return (
@@ -131,6 +132,11 @@ const Dashboard = ({
           </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
+        <Link
+            href="/allreports"
+            passHref
+            style={{ textDecoration: "none" }}
+          >
           <Paper
             elevation={3}
             style={{ padding: "20px", backgroundColor: "#00bfa5" }}
@@ -157,11 +163,12 @@ const Dashboard = ({
                       marginRight: "10px",
                     }}
                   >
-                    {dispatchedPhones.length}
+                    {collectedPhones.length}
                   </Box>
                  
                 </Box>
           </Paper>
+          </Link>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Paper
@@ -190,7 +197,7 @@ const Dashboard = ({
                       marginRight: "10px",
                     }}
                   >
-                    {bookedPhones.length}
+                    {repairedPhones.length}
                   </Box>
                  
                 </Box>

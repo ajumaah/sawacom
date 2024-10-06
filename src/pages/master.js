@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Dashboard from "@/components/dashboard/Dashboard";
-import { SERVER_URL } from "../../config";
-// import { SERVER_URL } from "../../config";
+
 
 const DashboardPage = () => {
   const [bookedPhones, setBookedPhones] = useState([]);
   const [dispatchedPhones, setDispatchedPhones] = useState([]);
   const [repairedPhones, setRepairedPhones] = useState([]);
   const [repaircenters, setRepaircenters] = useState([]);
+  const [collectedPhones, setCollectedPhones] = useState([]);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -35,10 +35,18 @@ const DashboardPage = () => {
   }, []);
   useEffect(() => {
     // Fetch data from the /booking API
-    fetch(`${SERVER_URL}/repaircenters`)
+    fetch(`${backendUrl}/repaircenters`)
       .then((response) => response.json())
       .then((data) => setRepaircenters(data))
       .catch((error) => console.error("Error fetching Repair centers:", error));
+  }, []);
+
+  useEffect(() => {
+    // Fetch data from the /booking API
+    fetch(`${backendUrl}/repair/collected`)
+      .then((response) => response.json())
+      .then((data) => setCollectedPhones(data))
+      .catch((error) => console.error("Error fetching collected phones:", error));
   }, []);
   return (
     <div>
@@ -47,6 +55,7 @@ const DashboardPage = () => {
         dispatchedPhones={dispatchedPhones}
         repairedPhones={repairedPhones}
         repaircenters={repaircenters}
+        collectedPhones={collectedPhones}
       />
     </div>
   );
