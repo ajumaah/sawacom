@@ -22,7 +22,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { SERVER_URL } from "../../config";
+// import { SERVER_URL } from "../../config";
 
 const Sidebar = () => {
   const [openRepairCenter, setOpenRepairCenter] = useState(false);
@@ -43,7 +43,7 @@ const Sidebar = () => {
           return;
         }
         console.log("Token from localStorage:", token); // Log the token
-        const response = await fetch(`${SERVER_URL}/users/me`, {
+        const response = await fetch(`${backendUrl}/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

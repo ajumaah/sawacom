@@ -21,8 +21,6 @@ import {
 import { MobileFriendly } from "@mui/icons-material";
 import jsPDF from "jspdf";
 import { repairCenters } from "./dashboard/DispatchDialog";
-import { SERVER_URL } from "../../config";
-// import { SERVER_URL } from '../../config';
 
 function BookingPage() {
   const [step, setStep] = useState(1);
@@ -61,7 +59,7 @@ function BookingPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${SERVER_URL}/booking`, {
+      const response = await fetch(`${backendUrl}/booking`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
