@@ -38,14 +38,14 @@ const Sidebar = () => {
     const fetchUserDetails = async () => {
       try {
         const token = localStorage.getItem("token");
-        if(!token) {
+        if (!token) {
           console.error("No Token foundin localstorage");
           return;
         }
         console.log("Token from localStorage:", token); // Log the token
-        const response = await fetch(`${backendUrl}/users/me`, {
+        const response = await fetch(`${SERVER_URL}/users/me`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 

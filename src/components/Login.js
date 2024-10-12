@@ -9,6 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
+import { SERVER_URL } from "../../config";
 // import { SERVER_URL } from "../../config";
 
 function Login() {
@@ -26,12 +27,13 @@ function Login() {
     event.preventDefault(); // Prevent form submission
     setLoading(true); // Start loading
     try {
-      const response = await fetch(`${backendUrl}/login`, {
+      const response = await fetch(`${SERVER_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        mode: "cors",
       });
 
       if (response.ok) {
