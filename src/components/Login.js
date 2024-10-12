@@ -36,12 +36,13 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        const { token, redirectUrl, userType, repairCenter } = data;
+        const { token, redirectUrl, userType, repairCenter, name } = data;
 
         // Save the token and user details in local storage
         localStorage.setItem("token", token);
         localStorage.setItem("userType", userType);
         localStorage.setItem("repairCenter", repairCenter);
+        localStorage.setItem("name", name);
         setToken(token);
 
         // Redirect based on userType

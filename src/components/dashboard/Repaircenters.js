@@ -18,7 +18,6 @@ import {
   Box,
 } from "@mui/material";
 
-
 const RepairCenters = () => {
   const [repairCenters, setRepairCenters] = useState([]);
   const [open, setOpen] = useState(false);
@@ -27,6 +26,8 @@ const RepairCenters = () => {
     location: "",
     phoneModels: "",
   });
+
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   // Fetch repair centers on component mount
   useEffect(() => {
@@ -155,7 +156,9 @@ const RepairCenters = () => {
                 <TableRow key={center._id}>
                   <TableCell>{center.name}</TableCell>
                   <TableCell>{center.location}</TableCell>
-                  <TableCell>{center.phoneModels?.join(", ") || "N/A"}</TableCell>
+                  <TableCell>
+                    {center.phoneModels?.join(", ") || "N/A"}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

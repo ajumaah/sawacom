@@ -38,6 +38,10 @@ const Sidebar = () => {
     const fetchUserDetails = async () => {
       try {
         const token = localStorage.getItem("token");
+        if(!token) {
+          console.error("No Token foundin localstorage");
+          return;
+        }
         console.log("Token from localStorage:", token); // Log the token
         const response = await fetch(`${backendUrl}/users/me`, {
           headers: {
@@ -55,7 +59,7 @@ const Sidebar = () => {
         console.log("User details fetched successfully:", data);
 
         setUser({
-          name: data.name || "Unknown User",
+          name: data.name || localStorage.getItem("name") || "Unknown User",
           userType: data.userType || "Unknown Type",
         });
       } catch (error) {
