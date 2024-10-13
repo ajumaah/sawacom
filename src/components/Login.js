@@ -9,8 +9,6 @@ import {
   Box,
 } from "@mui/material";
 import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
-// import { SERVER_URL } from "../../config";
-// import { SERVER_URL } from "../../config";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -26,6 +24,7 @@ function Login() {
   const handleLogin = async (event) => {
     event.preventDefault(); // Prevent form submission
     setLoading(true); // Start loading
+    setError("");
     try {
       const response = await fetch(`${backendUrl}/login`, {
         method: "POST",
@@ -33,12 +32,11 @@ function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        mode: "cors",
       });
 
       if (response.ok) {
         const data = await response.json();
-        const { token, redirectUrl, userType, repairCenter, name } = data;
+        const { token, userType, redirectUrl, repairCenter, name } = data;
 
         // Save the token and user details in local storage
         localStorage.setItem("token", token);
@@ -56,6 +54,7 @@ function Login() {
           setError("Unknown redirect URL");
         }
       } else {
+        const errorData = await response.json();
         setError("Invalid email or password");
       }
     } catch (error) {

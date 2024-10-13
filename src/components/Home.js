@@ -22,7 +22,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-// import { SERVER_URL } from "../../config";
 
 const Sidebar = () => {
   const [openRepairCenter, setOpenRepairCenter] = useState(false);
@@ -38,30 +37,35 @@ const Sidebar = () => {
     const fetchUserDetails = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) {
-          console.error("No Token foundin localstorage");
-          return;
-        }
-        console.log("Token from localStorage:", token); // Log the token
-        const response = await fetch(`${backendUrl}/users/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const name = localStorage.getItem("name");
+        const userType = localStorage.getItem("userType");
 
-        if (!response.ok) {
-          throw new Error(
-            `Failed to fetch user details. Status: ${response.status}`
-          );
-        }
-
-        const data = await response.json();
-        console.log("User details fetched successfully:", data);
-
+        // If data exists in local storage, update the state
         setUser({
-          name: data.name || localStorage.getItem("name") || "Unknown User",
-          userType: data.userType || "Unknown Type",
+          name: name || "Unknown User",
+          userType: userType || "Unknown Type",
         });
+
+        // Optionally, confirm user details from the backend
+        if (token) {
+          const response = await fetch(`${backendUrl}/users/me`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(
+              `Failed to fetch user details. Status: ${response.status}`
+            );
+          }
+
+          const data = await response.json();
+          setUser({
+            name: data.name,
+            userType: data.userType,
+          });
+        }
       } catch (error) {
         console.error("Error fetching user details:", error);
       }

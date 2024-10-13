@@ -21,7 +21,6 @@ import {
   Button,
 } from "@mui/material";
 
-
 const RepairCenterDashboard = () => {
   const [repairCenters, setRepairCenters] = useState([]);
   const [selectedRepairCenter, setSelectedRepairCenter] = useState("");
@@ -87,8 +86,8 @@ const RepairCenterDashboard = () => {
     } else if (selectedRepairCenter.includes("Oppo")) {
       return phone.phoneMake === "Oppo";
     } else if (selectedRepairCenter.includes("Tecno")) {
-    return phone.phoneMake === "Tecno";
-  }
+      return phone.phoneMake === "Tecno";
+    }
     return true;
   });
 
@@ -120,17 +119,19 @@ const RepairCenterDashboard = () => {
     }));
   };
 
-
   const handleSubmitRepair = async () => {
     if (selectedPhone) {
       try {
-        const response = await fetch(`${backendUrl}/repair/${selectedPhone._id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await fetch(
+          `${backendUrl}/repair/${selectedPhone._id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          }
+        );
         console.log("Selected Phone ID:", selectedPhone._id);
         if (response.ok) {
           console.log("Phone successfully repaired!");
@@ -142,7 +143,7 @@ const RepairCenterDashboard = () => {
         console.error("Error repairing phone:", error);
       }
     }
-  
+
     handleCloseDialog();
   };
 
@@ -188,7 +189,10 @@ const RepairCenterDashboard = () => {
                   <TableCell>{row.phoneNumber}</TableCell>
                   <TableCell>{row.phoneMake}</TableCell>
                   <TableCell>{row.phoneModel}</TableCell>
-                  <TableCell onClick={() => handleClickIMEI(row)} style={{ cursor: "pointer", color: "blue" }}>
+                  <TableCell
+                    onClick={() => handleClickIMEI(row)}
+                    style={{ cursor: "pointer", color: "blue" }}
+                  >
                     {row.imei}
                   </TableCell>
                   <TableCell>{row.phoneIssues}</TableCell>
@@ -279,7 +283,11 @@ const RepairCenterDashboard = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button onClick={handleSubmitRepair} variant="contained" color="primary">
+          <Button
+            onClick={handleSubmitRepair}
+            variant="contained"
+            color="primary"
+          >
             Submit Repair
           </Button>
         </DialogActions>
