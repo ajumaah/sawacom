@@ -9,6 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
+// import { SERVER_URL } from "../../config";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -36,22 +37,25 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        const { token, userType, redirectUrl, repairCenter, name } = data;
+        const { token, userType, phoneMake, repairCenter, name } = data;
 
         // Save the token and user details in local storage
         localStorage.setItem("token", token);
         localStorage.setItem("userType", userType);
         localStorage.setItem("repairCenter", repairCenter);
+        localStorage.setItem("phoneMake", phoneMake);
         localStorage.setItem("name", name);
         setToken(token);
 
         // Redirect based on userType
-        if (userType === "Technician") {
-          router.push(`/technician-dashboard?repairCenter=${repairCenter}`);
-        } else if (redirectUrl) {
-          router.push(redirectUrl);
+        if (userType === "Admin") {
+          router.push("/master");
+        } else if (userType === "User") {
+          router.push("/booking");
+        } else if (userType === "Technician") {
+          router.push(`/repaircenter_home/${repairCenter}`);
         } else {
-          setError("Unknown redirect URL");
+          setError("Unknown user type");
         }
       } else {
         const errorData = await response.json();

@@ -22,6 +22,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+// import { SERVER_URL } from "../../config";
 
 const Sidebar = () => {
   const [openRepairCenter, setOpenRepairCenter] = useState(false);
@@ -39,6 +40,8 @@ const Sidebar = () => {
         const token = localStorage.getItem("token");
         const name = localStorage.getItem("name");
         const userType = localStorage.getItem("userType");
+
+        console.log("User Name from localStorage:", name);
 
         // If data exists in local storage, update the state
         setUser({
